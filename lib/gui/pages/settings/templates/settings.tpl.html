@@ -1,0 +1,56 @@
+<div class="page-settings text-left">
+  <h1 class="title space-bottom-large">Settings</h1>
+
+  <div class="checkbox">
+    <label>
+      <input type="checkbox"
+        ng-model="settings.currentData.unmountOnSuccess"
+        ng-change="settings.model.set('unmountOnSuccess', settings.currentData.unmountOnSuccess)">
+
+      <!-- On Windows, "Unmounting" basically means "ejecting". -->
+      <!-- On top of that, Windows users are usually not even -->
+      <!-- familiar with the meaning of "unmount", which comes -->
+      <!-- from the UNIX world. -->
+
+      <span>
+        <span ng-show="settings.platform == 'win32'">Eject</span>
+        <span ng-hide="settings.platform == 'win32'">Auto-unmount</span>
+        on success
+      </span>
+    </label>
+
+    <div class="checkbox">
+      <label>
+        <input type="checkbox"
+          ng-model="settings.currentData.validateWriteOnSuccess"
+          ng-change="settings.model.set('validateWriteOnSuccess', settings.currentData.validateWriteOnSuccess)">
+
+        <span>Validate write on success</span>
+      </label>
+    </div>
+  </div>
+
+  <div>
+    <label class="setting-label">Download Location:</label>
+    <div class="input-group">
+      <input type="text" class="form-control" ng-model="settings.currentData.downloadPath" disabled>
+      <span class="input-group-btn">
+        <button class="btn btn-default" type="button" ng-click="settings.selectDownloadLocation()">Change...</button>
+        <button uib-tooltip="Open Folder" class="btn btn-default" type="button" ng-click="settings.showDownloadLocation()"><i class="glyphicon glyphicon-folder-open"></i></button>
+      </span>
+    </div>
+  </div>
+  <div>
+    <label class="setting-label">Download Sources:</label>
+    <div class="btn-group dropdown-block" uib-dropdown keyboard-nav ng-init="settings.init()">
+        <button id="simple-btn-keyboard-nav" type="button" uib-dropdown-toggle>
+            {{ settings.currentData.downloadSource ? settings.getMirrorName(settings.currentData.downloadSource) : 'Default Server (United States)' }}<span class="caret"></span>
+        </button>
+        <ul class="dropdown-menu" uib-dropdown-menu role="menu" aria-labelledby="simple-btn-keyboard-nav">
+            <li role="menuitem"
+              ng-repeat="mirror in settings.mirrors"
+              ng-click="settings.selectDownloadSource(mirror.os)"><a href="#!/settings">{{mirror.name}}</a></li>
+        </ul>
+    </div>
+  </div>
+</div>

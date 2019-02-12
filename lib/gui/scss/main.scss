@@ -1,0 +1,94 @@
+/*
+ * Copyright 2016 resin.io
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *    http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
+$icon-font-path: "../../../node_modules/bootstrap-sass/assets/fonts/bootstrap/";
+$font-size-base: 13px;
+$cursor-disabled: initial;
+$link-hover-decoration: none;
+$btn-min-width: 170px;
+$link-color: #ddd;
+
+@import "../../../node_modules/bootstrap-sass/assets/stylesheets/bootstrap";
+@import "./modules/theme";
+@import "./modules/bootstrap";
+@import "./modules/space";
+@import "./components/label";
+@import "./components/badge";
+@import "./components/caption";
+@import "./components/button";
+@import "./components/tick";
+@import "../components/modal/styles/modal";
+@import "../components/update-notifier/styles/update-notifier";
+@import "../components/progress-button/styles/progress-button";
+@import "../components/drive-selector/styles/drive-selector";
+@import "../components/image-selector/styles/image-selector";
+@import "../components/tooltip-modal/styles/tooltip-modal";
+@import "../components/warning-modal/styles/warning-modal";
+@import "../components/instruction-modal/styles/instruction-modal";
+@import "../pages/main/styles/main";
+@import "../pages/settings/styles/settings";
+@import "../pages/finish/styles/finish";
+
+body {
+  letter-spacing: 1px;
+}
+
+.section-footer {
+  display: flex;
+  position: absolute;
+  align-items: center;
+  padding: 0 30px;
+  bottom: 20px;
+  width: 100%;
+  height: 43px;
+
+  .footer-right {
+    display: flex;
+    font-size: 10px;
+    margin-left: auto;
+  }
+
+  .button {
+    &[disabled] {
+      @extend .button-no-hover;
+      background-color: $palette-theme-dark-background;
+      color: $palette-theme-dark-disabled-foreground;
+    }
+  }
+}
+
+.wrapper {
+  height: 100%;
+  margin: 20px 60px;
+}
+
+.section-header {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  margin: 0 30px;
+  margin-top: 25px;
+
+  .pine64 {
+    margin-right: -21px;
+  }
+
+  p {
+    text-align: right;
+    color: #505254;
+    font-size: 12px;
+  }
+}

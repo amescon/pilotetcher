@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Pilotetcher</title>
+    <link rel="stylesheet" type="text/css" href="../../node_modules/flexboxgrid/dist/flexboxgrid.css">
+    <link rel="stylesheet" type="text/css" href="css/main.css">
+    <link rel="stylesheet" type="text/css" href="css/desktop.css">
+    <link rel="stylesheet" type="text/css" href="css/angular.css">
+
+    <!-- Enable debug information from all modules that use `debug` -->
+    <!-- See https://github.com/visionmedia/debug#browser-support -->
+    <script>window.localStorage.debug = '*';</script>
+
+    <script src="./app.js"></script>
+  </head>
+  <body ng-app="Etcher">
+    <header class="section-header" ng-controller="HeaderController as header">
+      <div hide-if-state="settings">
+        <img alt="Product logo" class="pine64" width="267" height="85" src="assets/pilot_logo.png" />
+      </div>
+
+      <button class="button button-link" ui-sref="main" show-if-state="settings">
+        <span class="glyphicon glyphicon-chevron-left"></span> Back
+      </button>
+    </header>
+
+    <main class="wrapper" ui-view></main>
+
+    <footer class="section-footer" ng-controller="FooterController as footer">
+      <div class="footer-right">
+        <span class="caption">Powered by </span><svg-icon path="../../../assets/etcher.svg"
+          width="83px"
+          height="13px"
+          os-open-external="https://etcher.io?ref=etcher_footer"></svg-icon>
+      </div>
+    </footer>
+  </body>
+</html>

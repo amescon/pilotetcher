@@ -1,0 +1,6 @@
+node_modules/
+release/
+bin/
+bower_components/
+docs/
+doku_pictures/

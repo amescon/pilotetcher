@@ -1,0 +1,13 @@
+{
+  "name": "etcher",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "angular-mixpanel": "~1.1.2"
+  }
+}

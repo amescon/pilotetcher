@@ -1,0 +1,55 @@
+# appveyor file
+# http://www.appveyor.com/docs/appveyor-yml
+
+init:
+  - git config --global core.autocrlf input
+
+image: Visual Studio 2015
+
+cache:
+  - C:\Users\appveyor\.node-gyp
+  - '%AppData%\npm-cache'
+  - C:\ProgramData\chocolatey\bin -> appveyor.yml
+  - C:\ProgramData\chocolatey\lib -> appveyor.yml
+  - C:\Users\appveyor\AppData\Local\Temp\chocolatey -> appveyor.yml
+
+# what combinations to test
+environment:
+  global:
+    ELECTRON_NO_ATTACH_CONSOLE: true
+    nodejs_version: 6.1.0
+  matrix:
+    - TARGET_ARCH: x64
+    - TARGET_ARCH: x86
+
+install:
+  - ps: Install-Product node $env:nodejs_version x64
+  - npm install -g bower rimraf asar
+  - choco install nsis -version 2.51
+  - choco install upx
+  - choco install jq
+  - set PATH=C:\Program Files (x86)\Windows Kits\8.1\bin\x86;%PATH%
+  - set PATH=C:\Program Files (x86)\NSIS;%PATH%
+  - set PATH=C:\Ruby22\bin;%PATH%
+  - set PATH=C:\MinGW\bin;%PATH%
+  - set PATH=C:\MinGW\msys\1.0\bin;%PATH%
+  - gem install scss_lint
+  - pip install codespell
+  - make info
+  - make electron-develop
+
+build: off
+
+test_script:
+  - node --version
+  - npm --version
+  - bash .\scripts\ci\ensure-staged-sass.sh
+  - cmd: npm test
+
+notifications:
+
+  - provider: Webhook
+    url: https://webhooks.gitter.im/e/0becb34b32e20d389bb8
+    on_build_success: false
+    on_build_failure: true
+    on_build_status_changed: true
